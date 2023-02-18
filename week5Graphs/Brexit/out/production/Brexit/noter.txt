@@ -1,0 +1,63 @@
+https://itu.kattis.com/courses/BAPS/APS22/assignments/teshx4/problems/brexit
+
+TESTCASE 1
+
+4 3 4 1
+2 3
+2 4
+1 2
+
+4 = numberOfCountries
+3 = number of trading partnerships (n lines)
+4 = vertex of home country.
+1 = first country to leave.
+
+2-3
+2-4
+1-2 <- Leave
+
+Adj - ListPercentageTradingPartners
+[1] [2] [3] [4]
+ 0  66  100 100
+
+4> 50% = Stay.
+
+Record original outdegree of each vertex.
+Remove all edges from vertex to be removed.
+Check if vertex has outdegree > 50% of original outdegree.
+
+TESTCASE 2
+
+5 5 1 1
+3 4
+1 2
+2 3
+1 3
+2 5
+
+5 = numberOfCountries
+5 = number of trading partnerships (n lines)
+1 = vertex of home country.
+1 = first country to leave.
+
+1-1 first to leave = leave
+
+Testcase 3
+
+4 5 3 1
+1 2
+1 3
+2 3
+2 4
+3 4
+
+4 = numberOfCountries
+5 = number of trading partnerships (n lines)
+3 = vertex of home country.
+1 = first country to leave.
+
+Adj - ListPercentageTradingPartners
+[1] [2] [3] [4]
+ 0  66  66 100
+
+3> 50% = Stay.

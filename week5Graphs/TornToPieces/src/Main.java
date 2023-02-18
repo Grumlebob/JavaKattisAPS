@@ -12,6 +12,8 @@ public class Main {
         for (int i = 0; i < n; i++) {
             var line = scanner.nextLine();
             var split = line.split(" ");
+            if (split.length == 1)
+                continue;
             for (int j = 1; j < split.length; j++) {
                 graph.addStringEdge(split[0], split[j]);
             }
