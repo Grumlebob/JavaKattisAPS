@@ -1,10 +1,7 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -39,6 +36,9 @@ public class Main {
 
         while (countriesToLeave.size() > 0) {
             int countryToLeave = countriesToLeave.iterator().next();
+            if (CountriesThatLeft.contains(countryToLeave))
+                continue;
+
             if (countryToLeave == vertexOfHomeCountry) {
                 System.out.println("leave");
                 return;
@@ -46,20 +46,17 @@ public class Main {
             countriesToLeave.remove(countryToLeave);
             CountriesThatLeft.add(countryToLeave);
 
-            var edgesToRemove = digraph.adj.get(countryToLeave);
+            var verticesThatShouldRemoveCountry = digraph.adj.get(countryToLeave);
 
-            for (var item : edgesToRemove) {
-                digraph.adj.get(item).remove(countryToLeave);
+            for (var vertice : verticesThatShouldRemoveCountry) {
+                digraph.adj.get(vertice).remove(countryToLeave);
             }
 
-            for (var item : edgesToRemove) {
-                if (CountriesThatLeft.contains(item)) {
-                    continue;
-                }
-                float orignalOutdegree = startingOutdegree.get(item);
-                float newOutdegree = digraph.outdegree(item);
+            for (var vertice : verticesThatShouldRemoveCountry) {
+                float orignalOutdegree = startingOutdegree.get(vertice);
+                float newOutdegree = digraph.outdegree(vertice);
                 if (newOutdegree / orignalOutdegree <= 0.5) {
-                    countriesToLeave.add(item);
+                    countriesToLeave.add(vertice);
                 }
             }
         }

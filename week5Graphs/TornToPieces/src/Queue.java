@@ -19,7 +19,7 @@ public class Queue<Item> implements Iterable<Item> {
      */
     public Queue() {
         first = null;
-        last  = null;
+        last = null;
         n = 0;
     }
 
@@ -48,14 +48,13 @@ public class Queue<Item> implements Iterable<Item> {
      * @throws NoSuchElementException if this queue is empty
      */
     public Item peek() {
-        if (isEmpty()) throw new NoSuchElementException("Queue underflow");
         return first.item;
     }
 
     /**
      * Adds the item to this queue.
      *
-     * @param  item the item to add
+     * @param item the item to add
      */
     public void enqueue(Item item) {
         Node<Item> oldlast = last;
@@ -63,18 +62,12 @@ public class Queue<Item> implements Iterable<Item> {
         last.item = item;
         last.next = null;
         if (isEmpty()) first = last;
-        else           oldlast.next = last;
+        else oldlast.next = last;
         n++;
     }
 
-    /**
-     * Removes and returns the item on this queue that was least recently added.
-     *
-     * @return the item on this queue that was least recently added
-     * @throws NoSuchElementException if this queue is empty
-     */
+
     public Item dequeue() {
-        if (isEmpty()) throw new NoSuchElementException("Queue underflow");
         Item item = first.item;
         first = first.next;
         n--;
@@ -101,7 +94,7 @@ public class Queue<Item> implements Iterable<Item> {
      *
      * @return an iterator that iterates over the items in this queue in FIFO order
      */
-    public Iterator<Item> iterator()  {
+    public Iterator<Item> iterator() {
         return new LinkedIterator(first);
     }
 
@@ -118,52 +111,9 @@ public class Queue<Item> implements Iterable<Item> {
         }
 
         public Item next() {
-            if (!hasNext()) throw new NoSuchElementException();
             Item item = current.item;
             current = current.next;
             return item;
         }
     }
-
-
-    /**
-     * Unit tests the {@code Queue} data type.
-     *
-     * @param args the command-line arguments
-     */
-    public static void main(String[] args) {
-        Queue<String> queue = new Queue<String>();
-        while (!StdIn.isEmpty()) {
-            String item = StdIn.readString();
-            if (!item.equals("-"))
-                queue.enqueue(item);
-            else if (!queue.isEmpty())
-                StdOut.print(queue.dequeue() + " ");
-        }
-        StdOut.println("(" + queue.size() + " left on queue)");
-    }
 }
-
-/******************************************************************************
- *  Copyright 2002-2022, Robert Sedgewick and Kevin Wayne.
- *
- *  This file is part of algs4.jar, which accompanies the textbook
- *
- *      Algorithms, 4th edition by Robert Sedgewick and Kevin Wayne,
- *      Addison-Wesley Professional, 2011, ISBN 0-321-57351-X.
- *      http://algs4.cs.princeton.edu
- *
- *
- *  algs4.jar is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  algs4.jar is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with algs4.jar.  If not, see http://www.gnu.org/licenses.
- ******************************************************************************/
